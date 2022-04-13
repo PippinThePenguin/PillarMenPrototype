@@ -31,21 +31,16 @@ public class waypointMovement : MonoBehaviour
         else
             animator.SetBool("start_walking", true);
     }
-
     private void CreatePath()
     {
         levelPath = new Queue<SceneScript>();
-        foreach (SceneScript elem in wayPoints)
-        {
-            levelPath.Enqueue(elem);
-        }
+        foreach (SceneScript elem in wayPoints)        
+            levelPath.Enqueue(elem);        
     }
     public void CheckForMove()
     {
-        if (currentPoint.IsEmpty)
-        {
-            MoveToNextPoint();
-        }
+        if (currentPoint.IsEmpty)        
+            MoveToNextPoint();       
     }
 
     private void MoveToNextPoint()

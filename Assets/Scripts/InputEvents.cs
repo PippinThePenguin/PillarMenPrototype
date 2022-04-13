@@ -1,8 +1,6 @@
 using System;
 using UnityEngine;
 
-
-
 public class InputEvents : MonoBehaviour
 {
     public static event Action<Touch> OnClickEvent;
