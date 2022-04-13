@@ -60,12 +60,14 @@
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\Scripts\waypointMovement.cs" />
     <Compile Include="Assets\Scripts\Shooting.cs" />
+    <Compile Include="Assets\Scripts\InputEvents.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\EnemyScript.cs" />
     <Compile Include="Assets\Scripts\BulletScript.cs" />
     <Compile Include="Assets\Scripts\testScript.cs" />
+    <Compile Include="Assets\Scripts\SceneScript.cs" />
     <Compile Include="Assets\Controls.cs" />
-    <Compile Include="Assets\Scripts\InputEvents.cs" />
+    <Compile Include="Assets\Scripts\CameraScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

@@ -3,46 +3,65 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class waypointMovement : MonoBehaviour
 {
-    [SerializeField] private List<Transform> wayPoints = new List<Transform>();
-    // Start is called before the first frame update
-    [SerializeField] private int currentPoint;
+    [SerializeField] private List<SceneScript> wayPoints = new List<SceneScript>();
+    [SerializeField] public SceneScript currentPoint;
     [SerializeField] private NavMeshAgent player;
-
+    private Queue<SceneScript> levelPath;
+    [SerializeField] private Animator animator;
     void Start()
     {
-        currentPoint = 0;
-        EnemyScript.EnemyDied += MoveToNextPoint;
-    }
+        levelPath = new Queue<SceneScript>();
+        CreatePath();
+        currentPoint = levelPath.Dequeue();
+        EnemyScript.EnemyDied += CheckForMove;
 
-    // Update is called once per frame
+    }
     void Update()
     {
-        //HandleTap();
+        if (player.remainingDistance == 0)
+            animator.SetBool("start_walking", false);
     }
 
-    
-    private void MoveToNextPoint(GameObject obj)
+    private void CreatePath()
     {
-        if (currentPoint != wayPoints.Count -1)
+        foreach (SceneScript elem in wayPoints)
         {
-            currentPoint++;
-            player.SetDestination(wayPoints[currentPoint].position);
+            levelPath.Enqueue(elem);
+        }
+    }
+    public void CheckForMove(GameObject obj)
+    {
+        if (currentPoint.IsEmpty)
+        {
+            MoveToNextPoint();
+        }
+    }
+
+    private void MoveToNextPoint()
+    {
+        if (levelPath.Count == 0)
+        {
+            SceneManager.LoadScene("1Prototype");
         }
         else
         {
-            currentPoint = 0;
-            player.SetDestination(wayPoints[currentPoint].position);
+            currentPoint = levelPath.Dequeue();
+            player.SetDestination(currentPoint.WayPoint.position);
+            animator.SetBool("start_walking", true);
+            CheckForMove(gameObject);
         }
     }
+
 
     private void HandleTap()
     {
         if ((Input.touchCount > 0) && (player.remainingDistance == 0))
         {
-            MoveToNextPoint(gameObject);
+            MoveToNextPoint();
         }
     }
 }

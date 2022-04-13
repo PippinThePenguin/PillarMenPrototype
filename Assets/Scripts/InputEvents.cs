@@ -9,22 +9,29 @@ using UnityEngine.InputSystem;
 public class InputEvents : MonoBehaviour
 {
     public static event Action<Touch> OnClickEvent;
-    public static event Action<GameObject> EnemyDied;
+    private delegate void UpdateDelegate();
+    private UpdateDelegate updateDelegate;
     public bool newTap = true;
 
-
-
-    void Start()
+    private void Awake()
     {
-        
+        OnClickEvent = null;
+        updateDelegate = StartGame;
     }
 
-    // Update is called once per frame
+    private void StartGame()
+    {
+        if (Input.touchCount > 0)
+        {
+            GetComponent<waypointMovement>().CheckForMove(gameObject);
+            newTap = false;
+            updateDelegate = HandleTap;
+        }           
+    }
     void Update()
     {
-        HandleTap();
+        updateDelegate();
     }
-
     private void HandleTap()
     {
         if ((Input.touchCount > 0) && newTap)
