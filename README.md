@@ -1,3 +1,2 @@
-# PillarMenPrototype
+# PillarMenPrototype. Task for SquareDino
 
-#Some task for Square Dino
