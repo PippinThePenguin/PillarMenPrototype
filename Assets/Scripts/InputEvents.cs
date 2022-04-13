@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,7 +10,7 @@ public class InputEvents : MonoBehaviour
     public static event Action<Touch> OnClickEvent;
     private delegate void UpdateDelegate();
     private UpdateDelegate updateDelegate;
-    public bool newTap = true;
+    private bool newTap = true;
 
     private void Awake()
     {
@@ -22,7 +21,7 @@ public class InputEvents : MonoBehaviour
     private void StartGame()
     {
         if (Input.touchCount > 0)
-        {
+        {            
             GetComponent<waypointMovement>().CheckForMove(gameObject);
             newTap = false;
             updateDelegate = HandleTap;

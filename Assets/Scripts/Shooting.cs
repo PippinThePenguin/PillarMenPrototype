@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    public bool canShoot = true;
-    public Transform start;
-    public Pooler pool;
-    public InputEvents Controller;
+    [SerializeField]private Transform start;
+    [SerializeField]private Pooler pool;
     void Start()
     {
         InputEvents.OnClickEvent += TapHandler;        
@@ -23,8 +21,6 @@ public class Shooting : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(touch.position);
         RaycastHit hit;         
         if (Physics.Raycast(ray, out hit))
-        {
             Shoot(hit.point);
-        }
     }
 }
