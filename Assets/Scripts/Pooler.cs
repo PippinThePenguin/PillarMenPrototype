@@ -1,43 +1,55 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Pooler : MonoBehaviour
 {
+    public class Projectile
+    {
+        public GameObject obj;
+        public Rigidbody rb;
+        public Transform transform; 
+        public Projectile(GameObject o, Rigidbody r, Transform t)
+        {
+            obj = o;
+            rb = r;
+            transform = t;
+            obj.SetActive(false);
+        }
+        public void Throw(Vector3 start, Vector3 finish, float velocity)
+        {
+            Vector3 direction = (finish - start).normalized;
+            obj.SetActive(false);
+            transform.position = start;
+            transform.LookAt(finish);
+            obj.SetActive(true);
+            rb.velocity = direction * velocity;
+        }
+    }
     [System.Serializable]
     public class Pool
     {
-        public string tag;
         public GameObject prefab;
         public int size;
-    }
-    public Pool BulletPool;
-    public Queue<GameObject> BulletQueue;
+    }   
+    public Queue<Projectile> BulletQueue;
+    [SerializeField] private Pool BulletPool;
     [SerializeField] private float speed;
-
 
     private void Awake()
     {
-        BulletQueue = new Queue<GameObject>();
+        BulletQueue = new Queue<Projectile>();
         for (int i = 0; i < BulletPool.size; i++)
         {
             GameObject obj = Instantiate(BulletPool.prefab);
-            obj.transform.SetParent(transform);
-            obj.SetActive(false);
-            BulletQueue.Enqueue(obj);
+            obj.transform.SetParent(transform);            
+            Projectile proj = new Projectile(obj, obj.GetComponent<Rigidbody>(), obj.transform);
+            BulletQueue.Enqueue(proj);
         }
     }
-    public GameObject GetNextBullet(Vector3 point, Vector3 positon)
+    public void GetNextBullet(Vector3 point, Vector3 positon)
     {
-        GameObject currentObj = BulletQueue.Dequeue();
-        Vector3 direction = (point - positon).normalized;
-        currentObj.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-        currentObj.SetActive(false);
-        currentObj.transform.position = positon;
-        currentObj.transform.LookAt(point);
-        BulletQueue.Enqueue(currentObj);
-        currentObj.SetActive(true);
-        currentObj.GetComponent<Rigidbody>().AddForce(direction * speed);
-        return currentObj;
+        Projectile currentProj = BulletQueue.Dequeue();
+        currentProj.Throw(positon, point, speed);
+        BulletQueue.Enqueue(currentProj);
     }
 }

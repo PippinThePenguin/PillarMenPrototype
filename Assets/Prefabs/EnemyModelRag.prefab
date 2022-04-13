@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4c7e27c2fef18a4790b0ad85a812b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 5
+  Alive: 1
   maxHealth: 15
   ragdollForce: 3000
   healthBarActive: 0
@@ -192,7 +192,6 @@ MonoBehaviour:
   ragdoll: {fileID: 3772471526600536342}
   normal: {fileID: 8961476679790073079}
   body: {fileID: 7978377323484865294}
-  Alive: 1
 --- !u!1 &755553437800981005
 GameObject:
   m_ObjectHideFlags: 0
@@ -2708,7 +2707,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 20}
+  m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3354146884042218870
 MonoBehaviour:

@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 
 
 public class InputEvents : MonoBehaviour
@@ -17,12 +15,11 @@ public class InputEvents : MonoBehaviour
         OnClickEvent = null;
         updateDelegate = StartGame;
     }
-
     private void StartGame()
     {
         if (Input.touchCount > 0)
         {            
-            GetComponent<waypointMovement>().CheckForMove(gameObject);
+            GetComponent<waypointMovement>().CheckForMove();
             newTap = false;
             updateDelegate = HandleTap;
         }           

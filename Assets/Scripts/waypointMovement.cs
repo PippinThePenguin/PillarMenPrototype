@@ -1,23 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
 
 public class waypointMovement : MonoBehaviour
 {
-    [SerializeField] private List<SceneScript> wayPoints = new List<SceneScript>();
-    [SerializeField] public SceneScript currentPoint;
+    public SceneScript currentPoint;
+    [SerializeField] private List<SceneScript> wayPoints = new List<SceneScript>();    
     [SerializeField] private NavMeshAgent player;
     [SerializeField] private Queue<SceneScript> levelPath;
     [SerializeField] private Animator animator;
     void Awake()
-    {
-        levelPath = new Queue<SceneScript>();
+    { 
         CreatePath();
-
-
     }
     private void Start()
     {
@@ -39,14 +34,13 @@ public class waypointMovement : MonoBehaviour
 
     private void CreatePath()
     {
+        levelPath = new Queue<SceneScript>();
         foreach (SceneScript elem in wayPoints)
         {
-            Debug.Log("pig");
-            Debug.Log(levelPath.Count);
             levelPath.Enqueue(elem);
         }
     }
-    public void CheckForMove(GameObject obj)
+    public void CheckForMove()
     {
         if (currentPoint.IsEmpty)
         {
@@ -61,16 +55,7 @@ public class waypointMovement : MonoBehaviour
             currentPoint = levelPath.Dequeue();
             player.SetDestination(currentPoint.WayPoint.position);
             animator.SetBool("start_walking", true);
-            CheckForMove(gameObject);
-        }
-    }
-
-
-    private void HandleTap()
-    {
-        if ((Input.touchCount > 0) && (player.remainingDistance == 0))
-        {
-            MoveToNextPoint();
+            CheckForMove();
         }
     }
 }

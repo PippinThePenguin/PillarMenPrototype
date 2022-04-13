@@ -1,19 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyScript : MonoBehaviour
 {
-    
-    [SerializeField] private float health, maxHealth, ragdollForce;
-    [SerializeField] private bool healthBarActive = false;
-    [SerializeField] private Slider healthBar;
-    [SerializeField] private SceneScript scene;
-    [SerializeField] private GameObject ragdoll, normal;
-    [SerializeField] private Rigidbody body;
-    public static event Action<GameObject> EnemyDied;
+    public static event Action EnemyDied;
     public bool Alive = true;
     public float Health
     {
@@ -40,8 +31,16 @@ public class EnemyScript : MonoBehaviour
             healthBar.value = health;
         }
     }
+    [SerializeField] private float maxHealth, ragdollForce;
+    [SerializeField] private bool healthBarActive = false;
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private SceneScript scene;
+    [SerializeField] private GameObject ragdoll, normal;
+    [SerializeField] private Rigidbody body;
+    private float health;
     private delegate void UpdateDelegat();
     private UpdateDelegat updateDelegat;
+
     private void Awake()
     {
         EnemyDied = null;
@@ -49,7 +48,7 @@ public class EnemyScript : MonoBehaviour
     }
     private void Start()
     {
-        health = maxHealth;
+        Health = maxHealth;
         Alive = true;
         transform.LookAt(scene.WayPoint);
         
@@ -57,6 +56,11 @@ public class EnemyScript : MonoBehaviour
         healthBar.minValue = 0f;
         healthBar.value = health;
         healthBar.gameObject.SetActive(false);
+    }
+    private void Update()
+    {
+        if (updateDelegat != null)
+            updateDelegat();
     }
 
     private void Die()
@@ -74,15 +78,9 @@ public class EnemyScript : MonoBehaviour
                 normal.SetActive(false);
                 transform.GetComponent<CapsuleCollider>().enabled = false;
             }
-            EnemyDied?.Invoke(gameObject);
+            EnemyDied?.Invoke();
         }
     }
-    private void Update()
-    {
-        if (updateDelegat != null)
-            updateDelegat();
-    }
-
     private void RotateBar()
     {
         healthBar.transform.LookAt(Camera.main.transform);

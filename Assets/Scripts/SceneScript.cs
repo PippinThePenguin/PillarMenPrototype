@@ -1,15 +1,12 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SceneScript : MonoBehaviour
 {
     public Transform WayPoint;
-    [SerializeField] private Transform EnemiesParent;
-    public bool IsEmpty = false;
-    [SerializeField]private int enemiesCount;
     public Vector3 MiddlePoint;
+    public bool IsEmpty = false;    
+    [SerializeField] private Transform EnemiesParent;    
+    [SerializeField]private int enemiesCount;    
     void Start()
     {
         CountThem();
