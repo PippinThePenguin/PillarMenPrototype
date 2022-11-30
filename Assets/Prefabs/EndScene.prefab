@@ -725,14 +725,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Alive: 1
-  maxHealth: 5
-  ragdollForce: 0
-  healthBarActive: 0
-  healthBar: {fileID: 5611642572862241402}
-  scene: {fileID: 7764112300047853803}
-  ragdoll: {fileID: 0}
-  normal: {fileID: 0}
-  body: {fileID: 0}
+  _maxHealth: 1
+  _ragdollForce: 1
+  _healthBarActive: 0
+  _healthBar: {fileID: 5611642572862241402}
+  _scene: {fileID: 7764112300047853803}
+  _ragdoll: {fileID: 5612938619930639595}
+  _normal: {fileID: 5611642573367915342}
+  _body: {fileID: 0}
 --- !u!1 &7764112300047853805
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,8 +782,8 @@ MonoBehaviour:
   WayPoint: {fileID: 7764112300714905002}
   MiddlePoint: {x: 0, y: 0, z: 0}
   IsEmpty: 1
-  EnemiesParent: {fileID: 5611642574115684531}
-  enemiesCount: 0
+  _enemiesParent: {fileID: 0}
+  _enemiesCount: 0
 --- !u!1 &7764112300714905003
 GameObject:
   m_ObjectHideFlags: 0

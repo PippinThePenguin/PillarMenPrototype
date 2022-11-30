@@ -109,11 +109,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WayPoint: {fileID: 5007800616477672587}
-  EnemiesParent: {fileID: 5007800616381089193}
-  IsEmpty: 0
-  Number: 1
-  enemiesCount: 0
   MiddlePoint: {x: 0, y: 0, z: 0}
+  IsEmpty: 0
+  _enemiesParent: {fileID: 5007800616381089193}
+  _enemiesCount: 0
 --- !u!1001 &4543468658137129015
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -171,6 +170,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4579800880638146400, guid: 4241c04492a55f34c9a071a6a88fdd7f, type: 3}
       propertyPath: scene
+      value: 
+      objectReference: {fileID: 5007800616928928255}
+    - target: {fileID: 4579800880638146400, guid: 4241c04492a55f34c9a071a6a88fdd7f, type: 3}
+      propertyPath: _scene
       value: 
       objectReference: {fileID: 5007800616928928255}
     - target: {fileID: 5984814940186490915, guid: 4241c04492a55f34c9a071a6a88fdd7f, type: 3}
@@ -251,6 +254,10 @@ PrefabInstance:
       propertyPath: scene
       value: 
       objectReference: {fileID: 5007800616928928255}
+    - target: {fileID: 4579800880638146400, guid: 4241c04492a55f34c9a071a6a88fdd7f, type: 3}
+      propertyPath: _scene
+      value: 
+      objectReference: {fileID: 5007800616928928255}
     - target: {fileID: 5984814940186490915, guid: 4241c04492a55f34c9a071a6a88fdd7f, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -327,6 +334,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4579800880638146400, guid: 4241c04492a55f34c9a071a6a88fdd7f, type: 3}
       propertyPath: scene
+      value: 
+      objectReference: {fileID: 5007800616928928255}
+    - target: {fileID: 4579800880638146400, guid: 4241c04492a55f34c9a071a6a88fdd7f, type: 3}
+      propertyPath: _scene
       value: 
       objectReference: {fileID: 5007800616928928255}
     - target: {fileID: 5984814940186490915, guid: 4241c04492a55f34c9a071a6a88fdd7f, type: 3}

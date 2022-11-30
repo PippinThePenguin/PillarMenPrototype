@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ecabc23538a6924daf1333853d6b8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathFinder: {fileID: 1679201915743693243}
-  viewPoint: {x: 0, y: 0, z: 0}
+  _pathFinder: {fileID: 1679201915743693243}
+  _viewPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &622050923117150728
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,13 +239,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dc287d39bc83d346a6899ce1774171c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentPoint: {fileID: 0}
-  wayPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  player: {fileID: 6380709272645884729}
-  animator: {fileID: 7161788222890770358}
+  CurrentPoint: {fileID: 0}
+  _wayPoints: []
+  _player: {fileID: 6380709272645884729}
+  _animator: {fileID: 7161788222890770358}
 --- !u!114 &1679201915743693123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,10 +255,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36cd436f1c6efa844b0bbe7f5c7b3142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletPool:
-    prefab: {fileID: 5677533273129682224, guid: aa3148cc22e97ef4288fd6026b760ca9, type: 3}
-    size: 6
-  speed: 10
+  _bulletPool:
+    Prefab: {fileID: 5677533273129682224, guid: aa3148cc22e97ef4288fd6026b760ca9, type: 3}
+    Size: 5
+  _speed: 10
 --- !u!114 &1679201915743693122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,11 +271,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6198d8d8ff72cfb44a65410ed6420343, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  start: {fileID: 622050923117150729}
-  pool: {fileID: 1679201915743693123}
-  layers:
+  _start: {fileID: 622050923117150729}
+  _pool: {fileID: 1679201915743693123}
+  _layers:
     serializedVersion: 2
-    m_Bits: 275
+    m_Bits: 256
 --- !u!114 &1679201915743693125
 MonoBehaviour:
   m_ObjectHideFlags: 0

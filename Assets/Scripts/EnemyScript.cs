@@ -2,87 +2,78 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EnemyScript : MonoBehaviour
-{
+namespace PillarmanNamespace {
+  public class EnemyScript : MonoBehaviour {
     public static event Action EnemyDied;
     public bool Alive = true;
-    public float Health
-    {
-        get { return health; }
-        set
-        {
-            health = value;
-            if (health <= 0)
-            {
-                health = 0;
-                healthBar.value = health;
-                Die();
-            }
-            else if (health >= maxHealth)
-            {
-                health = maxHealth;
-            }
-            else if (Alive && !healthBarActive)
-            {
-                healthBar.gameObject.SetActive(true);
-                updateDelegat = RotateBar;
-                healthBarActive = true;
-            }
-            healthBar.value = health;
+    public float Health {
+      get { return _health; }
+      set {
+        _health = value;
+        if (_health <= 0) {
+          _health = 0;
+          _healthBar.value = _health;
+          Die();
+        } else if (_health >= _maxHealth) {
+          _health = _maxHealth;
+        } else if (Alive && !_healthBarActive) {
+          _healthBar.gameObject.SetActive(true);
+          _updateDelegat = RotateBar;
+          _healthBarActive = true;
         }
+        _healthBar.value = _health;
+      }
     }
-    [SerializeField] private float maxHealth, ragdollForce;
-    [SerializeField] private bool healthBarActive = false;
-    [SerializeField] private Slider healthBar;
-    [SerializeField] private SceneScript scene;
-    [SerializeField] private GameObject ragdoll, normal;
-    [SerializeField] private Rigidbody body;
-    private float health;
+    [SerializeField] private float _maxHealth;
+    [SerializeField] private float _ragdollForce;
+    [SerializeField] private bool _healthBarActive = false;
+    [SerializeField] private Slider _healthBar;
+    [SerializeField] private SceneScript _scene;
+    [SerializeField] private GameObject _ragdoll;
+    [SerializeField] private GameObject _normal;
+    [SerializeField] private Rigidbody _body;
+    private float _health;
     private delegate void UpdateDelegat();
-    private UpdateDelegat updateDelegat;
+    private UpdateDelegat _updateDelegat;
 
-    private void Awake()
-    {
-        EnemyDied = null;
-        updateDelegat = null;
+    private void Awake() {
+      EnemyDied = null;
+      _updateDelegat = null;
     }
-    private void Start()
-    {
-        Health = maxHealth;
-        Alive = true;
-        transform.LookAt(scene.WayPoint);
+    private void Start() {
+      Health = _maxHealth;
+      Alive = true;
+      transform.LookAt(_scene.WayPoint);
+
+      _healthBar.maxValue = _maxHealth;
+      _healthBar.minValue = 0f;
+      _healthBar.value = _health;
+      _healthBar.gameObject.SetActive(false);
+    }
+    private void Update() {
+      if (_updateDelegat != null) {
+        _updateDelegat();
+      }
         
-        healthBar.maxValue = maxHealth;
-        healthBar.minValue = 0f;
-        healthBar.value = health;
-        healthBar.gameObject.SetActive(false);
     }
-    private void Update()
-    {
-        if (updateDelegat != null)
-            updateDelegat();
-    }
-
-    private void Die()
-    {
-        if (Alive)
-        {
-            Alive = false;
-            scene.GotOne(gameObject);
-            if (ragdoll != null)
-            {
-                healthBar.gameObject.SetActive(false);
-                healthBarActive = false;
-                ragdoll.SetActive(true);
-                body.AddForce((UnityEngine.Random.value -0.5f)*ragdollForce, (UnityEngine.Random.value)* ragdollForce, (UnityEngine.Random.value -0.5f)* ragdollForce);
-                normal.SetActive(false);
-                transform.GetComponent<CapsuleCollider>().enabled = false;
-            }
-            EnemyDied?.Invoke();
+    private void Die() {
+      if (Alive) {
+        Alive = false;
+        _scene.GotOne(gameObject);
+        if (_ragdoll != null) {
+          _healthBar.gameObject.SetActive(false);
+          _healthBarActive = false;
+          _ragdoll.SetActive(true);
+          _body.AddForce((UnityEngine.Random.value - 0.5f) * _ragdollForce, (UnityEngine.Random.value) * _ragdollForce, (UnityEngine.Random.value - 0.5f) * _ragdollForce);
+          _normal.SetActive(false);
+          transform.GetComponent<CapsuleCollider>().enabled = false;
         }
+        EnemyDied?.Invoke();
+      }
     }
-    private void RotateBar()
-    {
-        healthBar.transform.LookAt(Camera.main.transform);
+    private void RotateBar() {
+      _healthBar.transform.LookAt(Camera.main.transform);
     }
+  }
 }
+  
